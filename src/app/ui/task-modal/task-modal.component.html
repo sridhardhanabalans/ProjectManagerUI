@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <input type="text" name="taskName" class="form-control form-control-sm" placeholder="Search..." [(ngModel)]="taskName" />
+    </div>
+  </div>
+
+  <div *ngIf='tasks'>
+    <div *ngFor='let task of filteredTasks'>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id={{task.taskId}} name="selectedTask" class="custom-control-input" [(ngModel)]='selectedTask' [value]='task'>
+            <label class="custom-control-label" for={{task.taskId}}>{{task.taskName}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!tasks" class="text-center text-primary">
+    <h6>
+      Loading tasks! Please wait...
+    </h6>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-success" [disabled]='!selectedTask' (click)="SelectTask()">Select</button>
+    </div>
+  </div>
+
+</div>

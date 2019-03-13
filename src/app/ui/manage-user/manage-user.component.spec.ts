@@ -1,0 +1,83 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AddTaskComponent } from 'src/app/ui/add-task/add-task.component';
+import { ViewTaskComponent } from 'src/app/ui/view-task/view-task.component';
+import { EditTaskComponent } from 'src/app/ui/edit-task/edit-task.component';
+import { ManageUserComponent } from 'src/app/ui/manage-user/manage-user.component';
+import { ManageProjectComponent } from 'src/app/ui/manage-project/manage-project.component';
+import { PageNotFoundComponent } from 'src/app/ui/page-not-found/page-not-found.component';
+import { UserModalComponent } from 'src/app/ui/user-modal/user-modal.component';
+import { ProjectModalComponent } from 'src/app/ui/project-modal/project-modal.component';
+import { TaskModalComponent } from 'src/app/ui/task-modal/task-modal.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap';
+import { APP_BASE_HREF } from '@angular/common';
+
+describe('ManageUserComponent', () => {
+  let component: ManageUserComponent;
+  let fixture: ComponentFixture<ManageUserComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ViewTaskComponent,
+        AddTaskComponent,
+        EditTaskComponent,
+        ManageUserComponent,
+        ManageProjectComponent,
+        PageNotFoundComponent,
+        UserModalComponent,
+        ProjectModalComponent,
+        TaskModalComponent
+      ],
+      imports: [
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ModalModule.forRoot()
+      ],
+      providers: [{provide: APP_BASE_HREF, useValue : '/' }
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ManageUserComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+
+  it('should have two users', () => {
+    spyOn(component, 'GetAllUsers').and.callThrough();
+    component.GetAllUsers();
+    expect(component.GetAllUsers).toHaveBeenCalled();
+  });
+
+  it('DeleteUser should have been called with id 1', () => {
+    spyOn(component, 'DeleteUser').and.callThrough();
+    component.DeleteUser(1)
+    expect(component.DeleteUser).toHaveBeenCalledWith(1);
+  });
+
+  it('Add User should have called task with id 1', () => {
+    let user = { userId: 1, firstName: 'Tom', lastName: 'Murray', employeeId: 1, projectId: 1, taskId: 1 };
+    spyOn(component, 'ManagerUser').and.callThrough();
+    component.ManagerUser(user);
+    expect(component.ManagerUser).toHaveBeenCalledWith(user);
+  });
+
+  it('Update User should have called task with id 1', () => {
+    let user = { userId: 1, firstName: 'Tom', lastName: 'Murray', employeeId: 1, projectId: 1, taskId: 1 };
+    spyOn(component, 'ManagerUser').and.callThrough();
+    component.ManagerUser(user);
+    expect(component.ManagerUser).toHaveBeenCalledWith(user);
+  });
+
+});

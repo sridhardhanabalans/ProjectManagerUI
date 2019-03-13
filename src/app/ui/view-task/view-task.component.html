@@ -1,0 +1,132 @@
+<br/>
+<h3> &nbsp; View Task</h3>
+
+<div class="container-fluid">
+  <br/>
+
+  <div class="row">
+
+    <div class="col-md-1 form-group">
+      <label class="col-form-label col-form-label-sm font-weight-bold">Project:</label>
+    </div>
+    <div class="col-md-3 form-group">
+      <input type="text" class="form-control form-control-sm" disabled [(ngModel)]="projectName" />
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="btn btn-secondary btn-sm btn-block" (click)="OpenModal(projectModal)">Search</button>
+    </div>
+
+    <div class="col-md-2 form-group text-right">
+      <label class="col-form-label col-form-label-sm font-weight-bold">Sort Task By:</label>
+    </div>
+
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <button type="button" class="btn btn-dark btn-sm btn-block" (click)="SortByStartDate()">Start Date</button>
+        </div>
+        <div class="col-md-3 form-group">
+          <button type="button" class="btn btn-dark btn-sm btn-block" (click)="SortByEndDate()">End Date</button>
+        </div>
+        <div class="col-md-3 form-group">
+          <button type="button" class="btn btn-dark btn-sm btn-block" (click)="SortByPriority()">Priority</button>
+        </div>
+        <div class="col-md-3 form-group">
+          <button type="button" class="btn btn-dark btn-sm btn-block" (click)="SortByCompleted()">Completed</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<hr/>
+
+<div class="container-fluid">
+
+  <div *ngIf="tasks">
+    <div *ngFor="let task of filteredTasks">
+
+      <div class="row font-weight-bold">
+        <div class="col-md-3">
+          Task
+        </div>
+        <div class="col-md-3">
+          Parent
+        </div>
+        <div class="col-md-1">
+          Priority
+        </div>
+        <div class="col-md-1">
+          Start
+        </div>
+        <div class="col-md-1">
+          End
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="card-deck">
+
+            <div class="card text-center bg-light">
+              <div class="card-body">
+                {{task.taskName}}
+              </div>
+            </div>
+
+            <div class="card text-center bg-light">
+              <div class="card-body">
+                {{task.parent?.taskName}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          {{task.priority}}
+        </div>
+        <div class="col-md-1">
+          {{task.startDate | date: "MM/dd/yyyy"}}
+        </div>
+        <div class="col-md-1">
+          {{task.endDate | date: "MM/dd/yyyy"}}
+        </div>
+        <div class="col-md-3">
+          <div class="row">
+            <div class="col-md-4">
+              <button type="button" class="btn btn-success btn-sm btn-block" (click)="RouteToEditTask(task.taskId)" [disabled]="currentDate.toJSON() >= task.endDate"> Edit </button>
+            </div>
+            <div class="col-md-4">
+              <button type="button" id="endTask" class="btn btn-secondary btn-sm btn-block" (click)="EndTask(task)" [disabled]="currentDate.toJSON() >= task.endDate">End Task</button>
+            </div>
+            <div class="col-md-4">
+              <button type="button" id="deleteTask" class="btn btn-danger btn-sm btn-block" (click)="DeleteTask(task.taskId)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    </div>
+  </div>
+
+  <div *ngIf="!tasks" class="text-center text-primary">
+    <h4>
+      Loading tasks! Please wait...
+    </h4>
+  </div>
+
+</div>
+
+<ng-template #projectModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">List Of Projects</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-project-modal [projects]="projects" (selectedProj)="SelectedProject($event)"></app-project-modal>
+  </div>
+</ng-template>

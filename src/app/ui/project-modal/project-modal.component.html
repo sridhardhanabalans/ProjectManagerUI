@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <input type="text" name="projectName" class="form-control form-control-sm" placeholder="Search..." [(ngModel)]="projectName" />
+      </div>
+    </div>
+  
+    <div *ngIf='projects'>
+      <div *ngFor='let project of filteredProjects'>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id={{project.projectId}} name="selectedProject" class="custom-control-input" [(ngModel)]='selectedProject' [value]='project'>
+              <label class="custom-control-label" for={{project.projectId}}>{{project.projectName}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!projects" class="text-center text-primary">
+      <h6>
+        Loading projects! Please wait...
+      </h6>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-success" [disabled]='!selectedProject' (click)="SelectProject()">Select</button>
+      </div>
+    </div>
+  
+  </div>

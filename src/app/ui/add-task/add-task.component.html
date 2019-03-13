@@ -1,0 +1,138 @@
+<br/>
+<h3>&nbsp; Add Task</h3>
+
+<form>
+  <div class="container-fluid">
+    <br/>
+
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <label class="col-form-label col-form-label font-weight-bold">Project:</label>
+      </div>
+      <div class="col-md-4 form-group">
+        <input type="text" name="projectName" class="form-control form-control-sm" disabled [(ngModel)]="projectName" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-secondary btn-sm btn-block" (click)="OpenModal(projectModal)">Search</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <label class="col-form-label font-weight-bold">Task:</label>
+      </div>
+      <div class="col-md-5 form-group">
+        <input type="text" class="form-control" name="taskName" required [(ngModel)]="task.taskName" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3">
+        <input type="checkbox" name="isParentTask" [(ngModel)]="isParentTask" />
+        <label class="col-form-label"> &nbsp; Parent Task</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <label class="col-form-label font-weight-bold">Priority:</label>
+      </div>
+      <div class="col-md-5 form-group">
+        <input type="range" class="custom-range" [disabled]='isParentTask' name="priority" [(ngModel)]="task.priority" min="0" max="30"
+          step="1" tooltip="task.priority" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <label class="col-form-label col-form-label font-weight-bold">Parent Task:</label>
+      </div>
+      <div class="col-md-4 form-group">
+        <input type="text" name="parentTask" class="form-control form-control-sm" disabled [(ngModel)]="parentTask" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" [disabled]='isParentTask' class="btn btn-secondary btn-sm btn-block" (click)="OpenModal(taskModal)">Search</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <label class="col-form-label font-weight-bold">Start Date:</label>
+      </div>
+      <div class="col-md-5 form-group">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="date" required [disabled]='isParentTask' class="form-control-sm" name="startDate" [ngModel]="task.startDate | date:'yyyy-MM-dd'" (ngModelChange)="task.startDate = $event"/>
+          </div>
+          <div class="col-md-4 text-center">
+            <label class="col-form-label font-weight-bold">End Date:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="date" required [disabled]='isParentTask' class="form-control-sm" name="endDate" [ngModel]="task.endDate | date:'yyyy-MM-dd'" (ngModelChange)="task.endDate = $event" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <label class="col-form-label col-form-label font-weight-bold">User:</label>
+      </div>
+      <div class="col-md-4 form-group">
+        <input type="text" name="userName" class="form-control form-control-sm" disabled [(ngModel)]="userName" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-secondary btn-sm btn-block" (click)="OpenModal(userModal)">Search</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-success btn-sm btn-block" (click)="AddTask()">Add Task</button>
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-secondary btn-sm btn-block" (click)="Reset()">Reset</button>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<ng-template #taskModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">List Of Tasks</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-task-modal [tasks]="parentTasks" (selectedParent)="SelectedParent($event)"></app-task-modal>
+  </div>
+</ng-template>
+
+<ng-template #projectModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">List Of Projects</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-project-modal [projects]="projects" (selectedProj)="SelectedProject($event)"></app-project-modal>
+  </div>
+</ng-template>
+
+
+<ng-template #userModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">List Of Users</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-user-modal [users]="users" (selectedPerson)="SelectedUser($event)"></app-user-modal>
+  </div>
+</ng-template>

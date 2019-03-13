@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <input type="text" name="userName" class="form-control form-control-sm" placeholder="Search..." [(ngModel)]="userName" />
+      </div>
+    </div>
+  
+    <div *ngIf='users'>
+      <div *ngFor='let user of filteredUsers'>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id={{user.userId}} name="selectedUser" class="custom-control-input" [(ngModel)]='selectedUser' [value]='user'>
+              <label class="custom-control-label" for={{user.userId}}>{{user.firstName}}, {{user.lastName}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!users" class="text-center text-primary">
+      <h6>
+        Loading users! Please wait...
+      </h6>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-success" [disabled]='!selectedUser' (click)="SelectUser()">Select</button>
+      </div>
+    </div>
+  
+  </div>
