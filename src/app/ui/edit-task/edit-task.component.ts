@@ -43,7 +43,7 @@ export class EditTaskComponent implements OnInit {
     this.GetAllParentTasks();
     this.GetAllUsers();
   }
- 
+ //Get Task by Id
   getTask(): void {
     const id =+this.route.snapshot.paramMap.get('id');
     this.task = this.tasks.filter(m=> m.taskId == id)[0];
@@ -51,7 +51,7 @@ export class EditTaskComponent implements OnInit {
     this.LoadParentTask();
     this.LoadUserName();
   }
-
+//Get All Projects
   GetAllProjects(): void {
     this.sharedService.GetAllProjects().subscribe(
       data => {
@@ -61,7 +61,7 @@ export class EditTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Tasks
   GetAllTasks(): void {
     this.sharedService.GetAllTasks().subscribe(
       data => {
@@ -94,7 +94,7 @@ export class EditTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Parent Tasks
   GetAllParentTasks(): void {
     this.sharedService.GetAllParentTasks().subscribe(
       data => {
@@ -103,7 +103,7 @@ export class EditTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Users
   GetAllUsers(): void {
     this.sharedService.GetAllUsers().subscribe(
       data => {
@@ -112,7 +112,7 @@ export class EditTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Update Existing Task
   UpdateTask(): void {
     if(!this.PerformValidations())
     {
@@ -124,7 +124,7 @@ export class EditTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Validation Method
   PerformValidations(): boolean{
     if(!this.task.projectId)
     {

@@ -47,6 +47,7 @@ export class AddTaskComponent implements OnInit {
     this.GetAllProjects();
     this.GetAllUsers();
   }
+  //Get All Tasks
 
   GetAllTasks(): void {
     this.sharedService.GetAllTasks().subscribe(
@@ -56,7 +57,7 @@ export class AddTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Parent Tasks
   GetAllParentTasks(): void {
     this.sharedService.GetAllParentTasks().subscribe(
       data => {
@@ -65,7 +66,7 @@ export class AddTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Projects
   GetAllProjects(): void {
     this.sharedService.GetAllProjects().subscribe(
       data => {
@@ -74,7 +75,7 @@ export class AddTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Users
   GetAllUsers(): void {
     this.sharedService.GetAllUsers().subscribe(
       data => {

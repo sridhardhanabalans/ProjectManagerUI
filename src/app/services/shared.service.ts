@@ -14,22 +14,25 @@ export class SharedService {
 
   constructor(private httpClient: HttpClient) { }
 
-  //baseApiURL: string = "http://localhost:50098/api/Values/";
-  baseApiURL: string = "http://localhost/ProjectManagerAPI/api/Values/";
+  //URL Used for for Hosting or accessing Web API Services
+  baseApiURL: string = "http://localhost:50098/api/Values/";
+  //baseApiURL: string = "http://localhost/ProjectManagerAPI/api/Values/";
 
+  //Get All Tasks call to Web API
   GetAllTasks(): Observable<Task[]>
   {
     const URL = this.baseApiURL.concat("GetAllTasks");
     return this.httpClient.get<Task[]>(URL)
     .pipe(catchError(this._handleError));
   }
-
+//Get All Parent Tasks call to Web API
   GetAllParentTasks(): Observable<Task[]>
   {
     const URL = this.baseApiURL.concat("GetAllParentTasks");
     return this.httpClient.get<Task[]>(URL)
     .pipe(catchError(this._handleError));
   }
+//Get All Projects call to Web API
 
   GetAllProjects(): Observable<Project[]>
   {
@@ -37,6 +40,7 @@ export class SharedService {
     return this.httpClient.get<Project[]>(URL)
     .pipe(catchError(this._handleError));
   }
+//Get All Users call to Web API
 
   GetAllUsers(): Observable<User[]>
   {
@@ -45,6 +49,8 @@ export class SharedService {
     .pipe(catchError(this._handleError));
   }
 
+  //Add New Task call to Web API
+
   AddTask(task: Task): Observable<void>
   {
     const URL = this.baseApiURL.concat("AddTask");
@@ -52,12 +58,15 @@ export class SharedService {
     .pipe(catchError(this._handleError));
   }
 
+  //Add New Project call to Web API
+
   AddProject(project: Project): Observable<void>
   {
     const URL = this.baseApiURL.concat("AddProject");
     return this.httpClient.post<void>(URL,project)
     .pipe(catchError(this._handleError));
   }
+  //Add New User call to Web API
 
   AddUser(user: User): Observable<void>
   {
@@ -65,6 +74,7 @@ export class SharedService {
     return this.httpClient.post<void>(URL,user)
     .pipe(catchError(this._handleError));
   }
+  //Update Existing Task call to Web API
 
   UpdateTask(task: Task): Observable<void>
   {
@@ -72,6 +82,7 @@ export class SharedService {
     return this.httpClient.put<void>(URL,task)
     .pipe(catchError(this._handleError));
   }
+  //Update Existing Project call to Web API
 
   UpdateProject(project: Project): Observable<void>
   {
@@ -79,6 +90,7 @@ export class SharedService {
     return this.httpClient.put<void>(URL,project)
     .pipe(catchError(this._handleError));
   }
+  //Update Existing User call to Web API
 
   UpdateUser(user: User): Observable<void>
   {
@@ -86,6 +98,7 @@ export class SharedService {
     return this.httpClient.put<void>(URL,user)
     .pipe(catchError(this._handleError));
   }
+  //Delete Existing Task call to Web API
 
   DeleteTask(id: number): Observable<void>
   {
@@ -93,6 +106,7 @@ export class SharedService {
     return this.httpClient.delete<void>(URL)
     .pipe(catchError(this._handleError));
   }
+  //Update Existing Project call to Web API
 
   DeleteProject(id: number): Observable<void>
   {
@@ -100,6 +114,7 @@ export class SharedService {
     return this.httpClient.delete<void>(URL)
     .pipe(catchError(this._handleError));
   }
+  //Update Existing User call to Web API
 
   DeleteUser(id: number): Observable<void>
   {
@@ -107,6 +122,7 @@ export class SharedService {
     return this.httpClient.delete<void>(URL)
     .pipe(catchError(this._handleError));
   }
+  //Error Handling Method
 
   private _handleError(error: any): Observable<never>
   {
