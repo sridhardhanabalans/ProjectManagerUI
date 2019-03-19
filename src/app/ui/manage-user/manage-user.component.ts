@@ -37,7 +37,7 @@ export class ManageUserComponent implements OnInit {
   ngOnInit() {
     this.GetAllUsers();
   }
-
+//Get All Users Method
   GetAllUsers(): void {
     this.sharedService.GetAllUsers().subscribe(
       data => {
@@ -47,7 +47,7 @@ export class ManageUserComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Manage User Method
   ManagerUser() {
     if(!this.PerformValidations())
     {
@@ -65,7 +65,7 @@ export class ManageUserComponent implements OnInit {
       );
     }
   }
-
+// Validation Method
   PerformValidations(): boolean{
     if((!this.user.firstName) || this.user.firstName.trim().length == 0)
     {
@@ -84,7 +84,7 @@ export class ManageUserComponent implements OnInit {
     }
     return true;
   }
-
+ //Delete User Method
   DeleteUser(id: number) {
     this.sharedService.DeleteUser(id).subscribe(data => {
       alert("User is deleted!");
@@ -120,7 +120,7 @@ export class ManageUserComponent implements OnInit {
       return (a.employeeId - b.employeeId)
     });
   }
-
+//Filter Users
   FilterUsers(): void {
     this.filterUserName = (this._userName) ? this._userName : "";
     this.filteredUsers = this.users.filter(m =>
