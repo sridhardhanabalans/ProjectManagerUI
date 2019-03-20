@@ -28,13 +28,13 @@ export class TaskModalComponent implements OnInit {
   ngOnInit() {
     this.filteredTasks = this.tasks;
   }
-
+//Task Filter Method
   FilterTasks(): void{
     this.filterTaskName = (this._taskName) ? this._taskName : "";
     this.filteredTasks = this.tasks.filter(m =>
       m.taskName.toLowerCase().indexOf(this.filterTaskName.toLowerCase()) !== -1)
   }
-
+//Task Select Method
   SelectTask():void{
     this.selectedParent.next(this.selectedTask);
   }

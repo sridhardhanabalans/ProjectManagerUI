@@ -28,13 +28,13 @@ export class ProjectModalComponent implements OnInit {
   ngOnInit() {
     this.filteredProjects = this.projects;
   }
-
+ //Filter Tasks Method
   FilterTasks(): void{
     this.filterProjectName = (this._projectName) ? this._projectName : "";
     this.filteredProjects = this.projects.filter(m =>
       m.projectName.toLowerCase().indexOf(this.filterProjectName.toLowerCase()) !== -1)
   }
-
+//Select Project Method
   SelectProject():void{
     this.selectedProj.next(this.selectedProject);
   }

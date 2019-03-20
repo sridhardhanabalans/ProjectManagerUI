@@ -28,7 +28,7 @@ export class ViewTaskComponent implements OnInit {
     this.GetAllProjects();
   }
 
-
+//Get All Tasks Method
   GetAllTasks(): void {
     this.sharedService.GetAllTasks().subscribe(
       data => {
@@ -38,7 +38,7 @@ export class ViewTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//Get All Projects Method
   GetAllProjects(): void {
     this.sharedService.GetAllProjects().subscribe(
       data => {
@@ -47,7 +47,7 @@ export class ViewTaskComponent implements OnInit {
       (error) => { console.log(error); }
     );
   }
-
+//End Task Method
   EndTask(task: Task) {
     task.endDate = new Date();
     this.sharedService.UpdateTask(task).subscribe(data => {
@@ -57,7 +57,7 @@ export class ViewTaskComponent implements OnInit {
       (error) => { console.log(error); }
     )
   }
-
+//Delete Task Method
   DeleteTask(id: number) {
     this.sharedService.DeleteTask(id).subscribe(data => {
       alert("Task is deleted!");
@@ -77,13 +77,13 @@ export class ViewTaskComponent implements OnInit {
   Refresh(): void {
     window.location.reload(true);
   }
-
+//Selected Project Method
   SelectedProject(project: Project): void {
     this.projectName = project.projectName;
     this.filteredTasks = this.tasks.filter(m => m.projectId == project.projectId);
     this.CloseModal();
   }
-
+//Sort by start date Method
   SortByStartDate(): void {
     this.filteredTasks = this.filteredTasks.sort(function (a, b) {
       if (a.startDate >= b.startDate)
@@ -92,7 +92,7 @@ export class ViewTaskComponent implements OnInit {
         return -1;
     });
   }
-
+//Sort by end date Method
   SortByEndDate(): void {
     this.filteredTasks = this.filteredTasks.sort(function (a, b) {
       if (a.endDate >= b.endDate)
@@ -101,12 +101,14 @@ export class ViewTaskComponent implements OnInit {
         return -1;
     });
   }
+//Sort by Priority Method
 
   SortByPriority(): void {
     this.filteredTasks = this.filteredTasks.sort(function (a, b) {
       return (a.priority - b.priority)
     });
   }
+//Sort by Completed Method
 
   SortByCompleted(): void {
     this.filteredTasks = this.filteredTasks.sort(function (a, b) {
@@ -116,6 +118,7 @@ export class ViewTaskComponent implements OnInit {
         return 1;
     });
   }
+//Route to Edit Task
 
   RouteToEditTask(id: number) {
     this.router.navigate(['/editTask', id])

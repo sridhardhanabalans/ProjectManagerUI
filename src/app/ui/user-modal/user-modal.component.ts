@@ -28,14 +28,14 @@ export class UserModalComponent implements OnInit {
   ngOnInit() {
     this.filteredUsers = this.users;
   }
-
+//Filter Tasks Method
   FilterTasks(): void{
     this.filterUserName = (this._userName) ? this._userName : "";
     this.filteredUsers = this.users.filter(m =>
       m.firstName.toLowerCase().indexOf(this.filterUserName.toLowerCase()) !== -1 ||
       m.lastName.toLowerCase().indexOf(this.filterUserName.toLowerCase()) !== -1)
   }
-
+//Select User Method
   SelectUser():void{
     this.selectedPerson.next(this.selectedUser);
   }
